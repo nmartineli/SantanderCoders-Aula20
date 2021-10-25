@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aula 20</title>
+  </head>
+  <body>
+    <h1>Cadastro</h1>
+    <form><input type="text" /><button type="submit">OK</button></form>
+    <section>
+      <h2>Lista de usuários</h2>
+      <ul></ul>
+    </section>
+  </body>
+  <script>
+    const form = document.querySelector('form');
+
+    function clearInput(input) {
+      input.value = '';
+    }
+
+    function createDeleteButton(user) {
+      const deleteButton = document.createElement('button');
+      deleteButton.textContent = 'remove';
+      deleteButton.onclick = () => {
+        user.remove();
+      };
+      user.appendChild(deleteButton);
+    }
+
+    function createListItem(userName) {
+      const userList = document.querySelector('ul');
+      const user = document.createElement('li');
+      user.textContent = userName + ' ';
+      userList.appendChild(user);
+      createDeleteButton(user);
+    }
+
+    function getUserName(input) {
+      return input.value;
+    }
+
+    function createUser(event) {
+      event.preventDefault();
+      let input = document.querySelector('input[type="text"]');
+
+      const userName = getUserName(input);
+
+      createListItem(userName);
+
+      clearInput(input);
+    }
+
+    form.addEventListener('submit', createUser);
+  </script>
+</html>
